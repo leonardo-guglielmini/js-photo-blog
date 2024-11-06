@@ -10,6 +10,8 @@
 </div>
 */
 
+const newPhotos = document.getElementById("new-photos");
+
 
 
 function getPhotos() {
@@ -55,3 +57,7 @@ function displayPhotos(list, root) {
 }
 
 getPhotos();
+
+newPhotos.addEventListener("click", function () {
+    getPhotos();
+})
