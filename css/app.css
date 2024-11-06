@@ -8,7 +8,7 @@
 
 /* DEBUG */
 .debug .main-content{
-    height: 200px;
+    height: 1200px;
 }
 
 /* HEADER */
@@ -17,7 +17,7 @@
 }
 
 .header-title{
-    font-size: 60px;
+    font-size: 100px;
 }
 
 /* MAIN */
