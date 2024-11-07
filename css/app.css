@@ -25,6 +25,17 @@
     background-image: url("../img/cork.png");
 }
 
+.card{
+    cursor: pointer;
+}
+
+.close-button{
+    top:150px;
+}
+
+.img-overlay{
+    top:500px;
+}
 
 /*MEDIA QUERIES*/
 @media screen and (max-width: 992px) {
