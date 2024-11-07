@@ -43,3 +43,10 @@
         font-size: 60px;
     }
 }
+
+/*
+//TEST HIDE SCROLLBAR
+::-webkit-scrollbar {
+    width: 0px;
+}
+*/

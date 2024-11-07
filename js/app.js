@@ -92,6 +92,8 @@ function imgOverlay(list) {
                 const cardImgEl = card.querySelector("img");
                 const imgId = cardImgEl.getAttribute("id") - 1;
                 imgEl.src = list[imgId].url;
+                bodyEl.classList.add("overflow-y-hidden");
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
     }
@@ -100,6 +102,7 @@ function imgOverlay(list) {
         closeBtnEl.classList.add("d-none");
         imgEl.classList.add("d-none");
         mainLayerForegroundEl.classList.add("d-none");
+        bodyEl.classList.remove("overflow-y-hidden");
     })
 }
 
