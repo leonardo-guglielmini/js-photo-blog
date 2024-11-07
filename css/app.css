@@ -39,16 +39,21 @@ body{
     display: none;
 }
 
-.v-hidden{
-    visibility: hidden;
-}
-
-.v-visible{
-    visibility: visible;
-}
-
 .overflow-y-hidden{
     overflow-y: hidden;
+}
+.smooth{
+    transition:  200ms linear;
+}
+    
+.rotate-zoom-10{
+    transform: rotate(10deg) scale(1.1);
+    position: relative;
+    z-index: 2;
+}
+
+.shadow-light{
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -61,6 +66,7 @@ body{
     height: 100%;
     background-color: rgba(0, 0, 0, 0.521);
     position: fixed;
+    z-index:3;
 }
 
 .close-button{
@@ -100,7 +106,7 @@ body{
 }
 .main-content{
     background-image: url("../img/cork.png");
-    padding: 30px;
+    padding: 50px;
 }
 
 .row{
@@ -138,22 +144,6 @@ body{
     top: -15px;
     left: 50%;
     transform: translateX(-50%);
-}
-
-.smooth{
-    transition:  200ms linear;
-}
-
-
-
-
-    
-.rotate-10{
-    transform: rotate(10deg);
-}
-
-.shadow-light{
-    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
 

@@ -92,12 +92,12 @@ function imgOverlay(list) {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
             card.addEventListener("mouseover", function () {
-                card.classList.add("rotate-10", "shadow-light");
+                card.classList.add("rotate-zoom-10", "shadow-light");
                 pin.classList.add("d-none");
 
             })
             card.addEventListener("mouseleave", function () {
-                card.classList.remove("rotate-10", "shadow-light");
+                card.classList.remove("rotate-zoom-10", "shadow-light");
                 pin.classList.remove("d-none");
             })
         });
@@ -108,6 +108,7 @@ function imgOverlay(list) {
         imgEl.classList.add("d-none");
         overlayEl.classList.add("d-none");
         bodyEl.classList.remove("overflow-y-hidden");
+        card.classList.remove("rotate-zoom-10", "shadow-light");
     })
 }
 
