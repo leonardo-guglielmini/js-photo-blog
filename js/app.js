@@ -14,21 +14,18 @@ const bodyEl = document.getElementById("body");
 const mainLayerEl = document.getElementById("main-layer");
 const overlayEl = document.getElementById("overlay")
 
-bodyEl.classList.add("position-relative");
-overlayEl.classList.add("position-absolute", "top-0", "start-50");
-mainLayerEl.classList.add("position-relative");
+overlayEl.classList.add("overlay", "d-none");
+//mainLayerEl.classList.add("position-relative");
 
 const mainLayerForegroundEl = document.createElement("div");
-mainLayerForegroundEl.classList.add("w-100", "h-100", "bg-dark", "position-absolute", "top-0", "start-0", "opacity-50", "d-none");
-mainLayerEl.appendChild(mainLayerForegroundEl);
 
 const closeBtnEl = document.createElement("button");
-closeBtnEl.classList.add("position-absolute", "close-button", "start-50", "translate-middle", "d-none");
+closeBtnEl.classList.add("position-absolute", "close-button", "d-none");
 closeBtnEl.textContent = "CHIUDI";
 overlayEl.appendChild(closeBtnEl);
 
 const imgEl = document.createElement("img");
-imgEl.classList.add("position-absolute", "img-overlay", "d-none", "start-50", "translate-middle");
+imgEl.classList.add("position-absolute", "img-overlay", "d-none");
 imgEl.src = "./img/placeholder.png";//debug
 overlayEl.appendChild(imgEl);
 
@@ -57,18 +54,18 @@ function getPhotos() {
 function displayPhotos(list, root) {
     root.innerHTML = "";
     let rowEl = document.createElement("div");
-    rowEl.classList.add("row", "pb-5", "gy-5", "justify-content-between");
+    rowEl.classList.add("row");
     root.appendChild(rowEl);
 
     list.forEach((photo) => {
         const { title, url, id } = photo;
 
         const cardEl = `
-            <div class="col-12 col-lg-3 col-sm-5 mx-1">
-                <div class="card bg-white h-100 p-3 position-relative">
-                    <img src="${url}" alt="img placeholder" class="w-100" id="${id}">
-                    <p class="text-left my-3 fw-light fst-italic opacity-75">${title}</p>
-                    <img src="./img/pin.svg" alt ="pin" class="pin position-absolute top-0 start-50 translate-middle">
+            <div class="col-3">
+                <div class="card">
+                    <img src="${url}" alt="img" class="card-img" id="${id}">
+                    <p class="card-text">${title}</p>
+                    <img src="./img/pin.svg" alt ="pin" class="card-pin">
                 </div>
             </div>
         `;
@@ -84,8 +81,10 @@ function imgOverlay(list) {
 
     if (closeBtnEl.classList.contains("d-none")) {
         cardList.forEach((card) => {
+            card.classList.add("smooth");
+            const pin = card.querySelector(".card-pin");
             card.addEventListener("click", function () {
-                mainLayerForegroundEl.classList.remove("d-none");
+                overlayEl.classList.remove("d-none");
                 closeBtnEl.classList.remove("d-none");
                 imgEl.classList.remove("d-none");
 
@@ -95,13 +94,22 @@ function imgOverlay(list) {
                 bodyEl.classList.add("overflow-y-hidden");
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+            card.addEventListener("mouseover", function () {
+                card.classList.add("rotate-10", "shadow-light");
+                pin.classList.add("d-none");
+
+            })
+            card.addEventListener("mouseleave", function () {
+                card.classList.remove("rotate-10", "shadow-light");
+                pin.classList.remove("d-none");
+            })
         });
     }
 
     closeBtnEl.addEventListener("click", function () {
         closeBtnEl.classList.add("d-none");
         imgEl.classList.add("d-none");
-        mainLayerForegroundEl.classList.add("d-none");
+        overlayEl.classList.add("d-none");
         bodyEl.classList.remove("overflow-y-hidden");
     })
 }
