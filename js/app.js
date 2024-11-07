@@ -72,10 +72,10 @@ function displayPhotos(list, root) {
         `;
         rowEl.innerHTML += cardEl;
     });
-    postItCreate(list);
+    imgOverlay(list);
 }
 
-function postItCreate(list) {
+function imgOverlay(list) {
     const cardList = document.querySelectorAll("div.card");
     console.log(cardList);
     console.log(list);
