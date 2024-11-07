@@ -11,13 +11,9 @@
 */
 
 const bodyEl = document.getElementById("body");
-const mainLayerEl = document.getElementById("main-layer");
 const overlayEl = document.getElementById("overlay")
 
 overlayEl.classList.add("overlay", "d-none");
-//mainLayerEl.classList.add("position-relative");
-
-const mainLayerForegroundEl = document.createElement("div");
 
 const closeBtnEl = document.createElement("button");
 closeBtnEl.classList.add("position-absolute", "close-button", "d-none");
@@ -61,7 +57,7 @@ function displayPhotos(list, root) {
         const { title, url, id } = photo;
 
         const cardEl = `
-            <div class="col-3">
+            <div class="col">
                 <div class="card">
                     <img src="${url}" alt="img" class="card-img" id="${id}">
                     <p class="card-text">${title}</p>
@@ -91,6 +87,7 @@ function imgOverlay(list) {
                 const cardImgEl = card.querySelector("img");
                 const imgId = cardImgEl.getAttribute("id") - 1;
                 imgEl.src = list[imgId].url;
+
                 bodyEl.classList.add("overflow-y-hidden");
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
