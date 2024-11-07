@@ -12,8 +12,10 @@
 
 const bodyEl = document.getElementById("body");
 const mainLayerEl = document.getElementById("main-layer");
+const overlayEl = document.getElementById("overlay")
 
 bodyEl.classList.add("position-relative");
+overlayEl.classList.add("position-absolute", "top-0", "start-50");
 mainLayerEl.classList.add("position-relative");
 
 const mainLayerForegroundEl = document.createElement("div");
@@ -23,12 +25,12 @@ mainLayerEl.appendChild(mainLayerForegroundEl);
 const closeBtnEl = document.createElement("button");
 closeBtnEl.classList.add("position-absolute", "close-button", "start-50", "translate-middle", "d-none");
 closeBtnEl.textContent = "CHIUDI";
-bodyEl.appendChild(closeBtnEl);
+overlayEl.appendChild(closeBtnEl);
 
 const imgEl = document.createElement("img");
 imgEl.classList.add("position-absolute", "img-overlay", "d-none", "start-50", "translate-middle");
 imgEl.src = "./img/placeholder.png";//debug
-bodyEl.appendChild(imgEl);
+overlayEl.appendChild(imgEl);
 
 function getPhotos() {
     const BASE_URL = 'https://jsonplaceholder.typicode.com/'
@@ -44,7 +46,7 @@ function getPhotos() {
             }
         })
         .then((res) => {
-            console.log(res, res.data);
+            //console.log(res, res.data);
 
             const photos = res.data;
             displayPhotos(photos, photoList);
@@ -64,7 +66,7 @@ function displayPhotos(list, root) {
         const cardEl = `
             <div class="col-12 col-lg-3 col-sm-5 mx-1">
                 <div class="card bg-white h-100 p-3 position-relative">
-                    <img src="${url}" alt="img placeholder" class="w-100 id="${id}">
+                    <img src="${url}" alt="img placeholder" class="w-100" id="${id}">
                     <p class="text-left my-3 fw-light fst-italic opacity-75">${title}</p>
                     <img src="./img/pin.svg" alt ="pin" class="pin position-absolute top-0 start-50 translate-middle">
                 </div>
@@ -77,8 +79,8 @@ function displayPhotos(list, root) {
 
 function imgOverlay(list) {
     const cardList = document.querySelectorAll("div.card");
-    console.log(cardList);
-    console.log(list);
+    //console.log(cardList);
+    //console.log(list);
 
     if (closeBtnEl.classList.contains("d-none")) {
         cardList.forEach((card) => {
@@ -86,6 +88,10 @@ function imgOverlay(list) {
                 mainLayerForegroundEl.classList.remove("d-none");
                 closeBtnEl.classList.remove("d-none");
                 imgEl.classList.remove("d-none");
+
+                const cardImgEl = card.querySelector("img");
+                const imgId = cardImgEl.getAttribute("id") - 1;
+                imgEl.src = list[imgId].url;
             });
         });
     }
