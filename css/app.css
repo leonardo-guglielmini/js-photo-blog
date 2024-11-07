@@ -24,3 +24,11 @@
 .main-content{
     background-image: url("../img/cork.png");
 }
+
+
+/*MEDIA QUERIES*/
+@media screen and (max-width: 992px) {
+    .header-title {
+        font-size: 60px;
+    }
+}

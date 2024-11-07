@@ -10,10 +10,6 @@
 </div>
 */
 
-const newPhotos = document.getElementById("new-photos");
-
-
-
 function getPhotos() {
     const BASE_URL = 'https://jsonplaceholder.typicode.com/'
     let url_body = 'photos'
@@ -46,10 +42,12 @@ function displayPhotos(list, root) {
         const { title, url } = photo;
 
         const cardEl = `
-            <div class="col-3 post-it bg-white mx-1 p-3 position-relative">
+            <div class="col-12 col-lg-3 col-sm-5 mx-1">
+                <div class="post-it bg-white h-100 p-3 position-relative">
                     <img src="${url}" alt="img placeholder" class="w-100">
                     <p class="text-left my-3 fw-light fst-italic opacity-75">${title}</p>
                     <img src="./img/pin.svg" alt ="pin" class="pin position-absolute top-0 start-50 translate-middle">
+                </div>
             </div>
         `;
         rowEl.innerHTML += cardEl;
@@ -57,7 +55,3 @@ function displayPhotos(list, root) {
 }
 
 getPhotos();
-
-newPhotos.addEventListener("click", function () {
-    getPhotos();
-})
