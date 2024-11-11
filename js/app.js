@@ -11,20 +11,25 @@
 */
 
 const bodyEl = document.getElementById("body");
-const overlayEl = document.getElementById("overlay")
+const overlayEl = document.getElementById("overlay");
 
-overlayEl.classList.add("overlay", "d-none");
+overlayEl.classList.add("d-none");
 
+//CREAZIONE ELEMENTO HTML BUTTON
 const closeBtnEl = document.createElement("button");
 closeBtnEl.classList.add("position-absolute", "close-button", "d-none");
 closeBtnEl.textContent = "CHIUDI";
 overlayEl.appendChild(closeBtnEl);
 
+
+//CREAZIONE ELEMENTO HTML IMG
 const imgEl = document.createElement("img");
 imgEl.classList.add("position-absolute", "img-overlay", "d-none");
 imgEl.src = "./img/placeholder.png";//debug
 overlayEl.appendChild(imgEl);
 
+
+//FUNZIONE: CHIAMATA ALL'API E RECUPERO DEI DATI
 function getPhotos() {
     const BASE_URL = 'https://jsonplaceholder.typicode.com/'
     let url_body = 'photos'
@@ -44,9 +49,10 @@ function getPhotos() {
             const photos = res.data;
             displayPhotos(photos, photoList);
         })
-
 }
 
+
+//FUNZIONE: CREAZIONE CARD
 function displayPhotos(list, root) {
     root.innerHTML = "";
     let rowEl = document.createElement("div");
@@ -70,6 +76,8 @@ function displayPhotos(list, root) {
     imgOverlay(list);
 }
 
+
+//FUNZIONE: VISIONE OVERLAY 
 function imgOverlay(list) {
     const cardList = document.querySelectorAll("div.card");
     //console.log(cardList);
@@ -79,6 +87,7 @@ function imgOverlay(list) {
         cardList.forEach((card) => {
             card.classList.add("smooth");
             const pin = card.querySelector(".card-pin");
+
             card.addEventListener("click", function () {
                 overlayEl.classList.remove("d-none");
                 closeBtnEl.classList.remove("d-none");
@@ -91,15 +100,17 @@ function imgOverlay(list) {
                 bodyEl.classList.add("overflow-y-hidden");
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+
             card.addEventListener("mouseover", function () {
                 card.classList.add("rotate-zoom-10", "shadow-light");
                 pin.classList.add("d-none");
 
-            })
+            });
+
             card.addEventListener("mouseleave", function () {
                 card.classList.remove("rotate-zoom-10", "shadow-light");
                 pin.classList.remove("d-none");
-            })
+            });
         });
     }
 
@@ -108,7 +119,15 @@ function imgOverlay(list) {
         imgEl.classList.add("d-none");
         overlayEl.classList.add("d-none");
         bodyEl.classList.remove("overflow-y-hidden");
-        card.classList.remove("rotate-zoom-10", "shadow-light");
+    })
+
+    overlayEl.addEventListener("click", function (event) {
+        if (!event.target.classList.contains("img-overlay")) {
+            closeBtnEl.classList.add("d-none");
+            imgEl.classList.add("d-none");
+            overlayEl.classList.add("d-none");
+            bodyEl.classList.remove("overflow-y-hidden");
+        }
     })
 }
 
